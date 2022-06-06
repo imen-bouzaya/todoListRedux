@@ -7,10 +7,10 @@ export const add =(newTask)=>{
     payload:newTask
 }
 }
-export const editTask=(id)=>{
+export const editTask=(taskAncien, text)=>{
     return{
         type:EDITTASK,
-        payload:id
+        payload:taskAncien,text
     }
 }
 export const deleteTask = (id) => {

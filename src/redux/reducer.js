@@ -28,21 +28,20 @@ const init ={
 
 const reducer =(state=init,{type,payload})=>{
     switch (type) {
+
         case ADDTASK:
-            return{
-                ...state,TASK:[...state.TASK,payload]
-            }
+            return{ ...state,TASK:[...state.TASK,payload] }
+
     case EDITTASK:
-        return{
-        
-        }
-        case DELETE_TASK:
+        return state.TASK.map((el)=>el.id==payload.id? payload : el);
+    
+    case DELETE_TASK:
       return state.TASK.filter((el) => el.id !== payload);
-    case COMPLETE_TASK:
-      return state.TASK.map((el) =>
-        el.id === payload ? { ...el, completed: !el.completed } : el
-      );
-        default:
+    
+      case COMPLETE_TASK:
+      return state.TASK.map((el) => el.id === payload ? { ...el, completed: !el.completed } : el  );
+    
+      default:
            return state
     }
 }

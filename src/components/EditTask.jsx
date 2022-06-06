@@ -17,7 +17,7 @@ const customStyles = {
   
   // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
   Modal.setAppElement('#root');
-const EditTask = () => {
+const EditTask = ({taskAncien}) => {
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -26,13 +26,17 @@ const EditTask = () => {
   function closeModal() {
     setIsOpen(false);
   }
-const [text, setText] = useState("")
+const [ancien, setTextAncien] = useState(taskAncien.description)
 const handleChange=(e)=>{
-    setText(e.target.value)   
+    setTextAncien(e.target.value)   
   }
   const dispatch=useDispatch();
-  const handleEdit=(el, text)=>{
-dispatch(editTask(el.id,text))
+  
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+  const taskModifié={...taskAncien, task :  ancien}
+dispatch(editTask(taskModifié))
+closeModal();
   }
   
   return (
@@ -40,15 +44,13 @@ dispatch(editTask(el.id,text))
 <button onClick={openModal}>Edit Task</button>
       <Modal
         isOpen={modalIsOpen}
-       
         onRequestClose={closeModal}
         style={customStyles}
-        contentLabel="Example Modal"
-      >
+        contentLabel="Example Modal">
         <h2>Edit Task</h2>
-        <form>
-          <input value={text} type="text" placeholder='add to do...' onChange={handleChange} />
-          <button onClick={handleEdit}>Confirmer</button>
+        <form onSubmit={handleSubmit}>
+          <input value={ancien} type="text" placeholder='.....' onChange={handleChange} />
+          <button >Confirmer</button>
           <button onClick={closeModal}>Cancel</button>
         </form>
       </Modal>
