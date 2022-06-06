@@ -26,15 +26,15 @@ const EditTask = ({taskAncien}) => {
   function closeModal() {
     setIsOpen(false);
   }
-const [ancien, setTextAncien] = useState(taskAncien.description)
+const [ancien, setAncien] = useState(taskAncien.description)
 const handleChange=(e)=>{
-    setTextAncien(e.target.value)   
+    setAncien(e.target.value)   
   }
   const dispatch=useDispatch();
   
   const handleSubmit=(e)=>{
     e.preventDefault();
-  const taskModifié={...taskAncien, task :  ancien}
+  const taskModifié={...taskAncien, description :  ancien}
 dispatch(editTask(taskModifié))
 closeModal();
   }
@@ -49,7 +49,7 @@ closeModal();
         contentLabel="Example Modal">
         <h2>Edit Task</h2>
         <form onSubmit={handleSubmit}>
-          <input value={ancien} type="text" placeholder='.....' onChange={handleChange} />
+          <input value={ancien} type="text" onChange={handleChange} />
           <button >Confirmer</button>
           <button onClick={closeModal}>Cancel</button>
         </form>

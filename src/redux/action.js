@@ -1,5 +1,5 @@
 import EditTask from "../components/EditTask"
-import { ADDTASK, EDITTASK,COMPLETE_TASK,DELETE_TASK } from "./typeAction"
+import { ADDTASK, EDITTASK,COMPLETE_TASK,DELETE_TASK, FILTER_TASK } from "./typeAction"
 
 export const add =(newTask)=>{
     return {
@@ -7,10 +7,10 @@ export const add =(newTask)=>{
     payload:newTask
 }
 }
-export const editTask=(taskAncien, text)=>{
+export const editTask=(taskAncien)=>{
     return{
         type:EDITTASK,
-        payload:taskAncien,text
+        payload:taskAncien
     }
 }
 export const deleteTask = (id) => {
@@ -19,6 +19,11 @@ export const deleteTask = (id) => {
       payload: id,
     };
   };
+  export const fltr=()=>{
+    return {
+      type:FILTER_TASK
+    }
+  }
   export const completeTask = (id) => {
     return {
       type: COMPLETE_TASK,
